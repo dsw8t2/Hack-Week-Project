@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Song scanner</title>
+        <meta charset="utf-8">
+        <style>
+            div {
+                text-align: center;
+            }
+            
+        </style>
+        <script>
+            function loadData(query){
+                document.getElementById("spotifyResult").innerHTML = "loading...";
+                document.getElementById("YoutubeResult").innerHTML = "loading...";
+                var xhttp = new XMLHttpRequest();
+                var youtubeHttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function(){
+                    if(this.readyState==4 && this.status == 200){
+                        var response = xhttp.responseText;
+                        response = JSON.parse(response);
+                        document.getElementById("spotifyResult").innerHTML=response;
+                    }
+                };
+                youtubeHttp.onreadystatechange = function(){
+                    if(this.readyState==4 && this.status == 200){
+                        var response = youtubeHttp.responseText;
+                        response = JSON.parse(response);
+                        document.getElementById("YoutubeResult").innerHTML = response;
+                    }
+                };
+                //xhttp.open
+                //xhttp.send();
+                //youtubeHttp.open
+                //youtubeHttp.send();
+            }
+        
+        
+        </script>
+    </head>
+    <body>
+        <div>
+            <h2>Welcome to Song Scanner</h2><br>
+            <p>The application to search for songs on multiple platforms</p>
+            <a href="../songScanner/spotify">Spotify</a> <a href="../songScanner/youtube">Youtube</a>
+            <a href="../songScanner/soundcloud">soundcloud</a>
+            <a href="../songScanner/itunes">itunes</a>
+            <br>
+            <form><br>
+                <input type="text" name="query" value="query">
+                <input type="button" value="Search" onclick="loadData(query)">
+            </form>        
+        </div>
+        <div>
+            <table style="width:75%">
+                <tr>
+                    <th>Spotify</th>
+                    <th>Youtube</th>
+                    <th>Soundcloud</th>
+                    <th>iTunes</th>
+                </tr>
+                <tr>
+                    <td id="spotifyResult"></td>
+                    <td id="YoutubeResult"></td>
+                    <td>Soundcloud not yet supported</td>
+                    <td>iTunes not yet supported</td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>
